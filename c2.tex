@@ -1,0 +1,1003 @@
+\documentclass{beamer}
+
+% https://matplotlib.org/users/pyplot\_tutorial.html#controlling-line-properties
+
+\usetheme{Boadilla}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usetikzlibrary{trees}
+
+% Instituto de Neurobiolog\'ia \ UNAM - M\'exico
+
+\newcommand\nombre{ }
+\newcommand\depto{Introducci\'on}
+\newcommand\instituto{}
+\newcommand\correo{}
+\newcommand\iniciales{LGS}
+
+\newtheorem{mytheorem}{Theorem}
+\newtheorem{mylemma}{Lemma}
+\newtheorem{mycorollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{mydefinition}{Definition}
+\newtheorem{historylabel}{Historycal label}
+\newtheorem{myexample}{Example}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\bR}{{\mathbf{R}}}
+\newcommand{\bC}{{\mathbf{C}}}
+\newcommand{\bT}{{\mathbf{T}}}
+\newcommand{\bZ}{{\mathbf{Z}}}
+\newcommand{\myemph}[1]{\alert{#1}}
+\newcommand{\essinf}{\mathop{\mathrm{ess\,inf}}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\eps}{\varepsilon}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Range}{Im}
+\DeclareMathOperator{\mes}{mes}
+
+\tikzstyle{thinarrow}=[densely dashed,very thin]
+
+\title[Introducci\'on]
+{\mbox{Introducci\'on al Lenguaje de Programaci\'on}\\mbox{PYTHON}}
+\author[santosg572@gmail.com]{\nombre \
+{\small \correo}}
+\institute[\iniciales]{\instituto}
+\date{\today}
+
+\hypersetup{pdfkeywords={Hermitian Toeplitz matrices,eigenvectors,asymptotics}}
+
+\AtBeginSection[] {
+\begin{frame}{Contenido}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+%===============================================
+
+\begin{document}
+
+%\begin{frame}[label=titlepage]
+%\titlepage
+
+%\end{frame}
+%===============================================
+
+%\begin{frame}{Contents}
+%\tableofcontents
+
+%\end{frame}
+
+%===============================================
+% http://docs.python.org.ar/tutorial/2/introduction.html
+
+%\section{Palabras reservadas en Python}
+
+\begin{frame}{C2}
+
+\textbf{$>>$ N\'umeros con exponentes}
+
+\hfill
+
+$>$ 1.2e3
+
+\hfill
+
+$>$ 1.2e-2
+
+\hfill
+
+$>$ 3.9+4.5i 
+
+\hfill
+\end{frame}
+
+\begin{frame}{C2}
+
+\textbf{$>>$ M\'odulo y Cociente Entero}
+
+\hfill
+
+$>$ 119 \%/\% 13
+
+\hfill
+
+$>$ 119 \%\% 13
+
+\hfill
+
+$>$ 9 \%\% 2
+
+\hfill
+
+$>$ 8 \%\% 2
+
+\hfill
+
+$>$ 15421 \%\% 7 == 0
+
+   
+\end{frame}
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Redondeo}
+
+\hfill
+
+$>>$ floor(5.7)
+
+\hfill
+
+$>>$ ceiling(5.7)
+
+\hfill
+
+$>>$ rounded<-function(x) floor(x+0.5)
+
+\hfill
+
+$>>$ rounded(5.7)
+
+\hfill
+
+$>>$ rounded(5.4)
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Infinito y cosas que no son n\'umeros (NaN)}
+
+\hfill
+
+Inf
+
+\hfill
+
+-Inf:
+
+\hfill
+
+3/0
+
+\hfill
+
+-12/0
+
+\hfill
+
+exp(-Inf)
+
+\hfill
+
+0/Inf
+
+\hfill
+
+$(0:3)^{Inf}$
+
+\hfill
+
+NaN
+
+\hfill
+
+
+
+
+
+\end{frame}
+
+\begin{frame}{C2}
+
+0/0
+
+\hfill
+
+Inf-Inf
+
+\hfill
+
+Inf/Inf
+
+\hfill
+
+NA 
+
+\hfill
+
+is.finite(10)
+
+\hfill
+
+is.infinite(10)
+
+\hfill
+
+is.infinite(Inf)
+
+
+\end{frame}
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Missing values NA}
+
+\hfill
+
+x<-c(1:8,NA)
+
+mean(x)
+
+\hfill
+
+mean(x,na.rm=T)
+
+\hfill
+
+is.na(x) 
+
+\hfill
+
+vmv<-c(1:6,NA,NA,9:12)
+
+vmv
+
+\hfill
+
+seq(along=vmv)[is.na(vmv)]
+
+\hfill
+
+which(is.na(vmv))
+
+
+\end{frame}
+
+\begin{frame}{C2}
+
+\hfill
+
+vmv[is.na(vmv)] $<-$ 0
+
+vmv
+
+\hfill
+
+
+vmv $<-$ c(1:6,NA,NA,9:12)
+
+ifelse(is.na(vmv),0,vmv)
+
+\hfill
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Operadores}
+
+\hfill
+
++ \hspace{1mm}   - \hspace{1mm}  * \hspace{1mm}  /  \hspace{1mm}  \%\%  \hspace{1mm} (exponente)   \hspace{4mm} aritm\'eticos
+
+\hfill
+
+$> \hspace{3mm}  >= \hspace{3mm}   < \hspace{3mm}  <=  \hspace{3mm}  ==  \hspace{3mm}  != $ \hspace{4mm}	relacionales
+
+\hfill
+
+$!  \hspace{3mm}  \& \hspace{3mm}   |$	\hspace{4mm} 		logicos
+
+\hfill
+
+~  	 \hspace{4mm} 	modelo de formula
+
+\hfill
+
+$<- \hspace{3mm} ->$    asignamiento
+
+\hfill
+
+\$		indexamiento de listas
+
+\hfill
+
+: \hspace{4mm}	 crea secuencias
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Creando Vectores}
+
+\hfill
+
+y $<-$ 4.3
+
+\hfill
+
+z $<-$ y[-1]
+
+\hfill
+
+length(z)
+
+\hfill
+
+y $<-$ 10:16
+
+\hfill
+
+y $<-$ c(10, 11, 12, 13, 14, 15, 16)
+
+\hfill
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+y $<-$ scan()
+
+1: 10
+
+2: 11
+
+3: 12
+
+4: 13
+
+5: 14
+
+6: 15
+
+7: 16
+
+8:
+
+Read 7 items
+
+\hfill
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+A $<-$ 1:10
+
+\hfill
+
+B $<- $c(2,4,8)
+
+\hfill
+
+A*B
+
+\hfill
+
+[1] 2 8 24 8 20 48 14 32 72 20
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Nombrando los elementos del Vector}
+
+
+\hfill
+
+counts $<-$ c(25,12,7,4,6,2,1,0,2))
+
+[1] 25 12 7 4 6 2 1 0 2
+
+\hfill
+
+names(counts) $<-$ 0:8
+
+\hfill
+
+counts
+0 1 2 3 4 5 6 7 8
+25 12 7 4 6 2 1 0 2
+
+\hfill
+
+(st $<-$ table(rpois(2000,2.3)))
+
+0 1 2 3 4 5 6 7 8 9
+
+205 455 510 431 233 102 43 13 7 1
+
+\hfill
+
+as.vector(st)
+
+[1] 205 455 510 431 233 102 43 13 7 1
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Funciones Vectoriales}
+
+
+\hfill
+
+\textbf{max(x)} -	maximum value in x
+
+\textbf{min(x)} -	minimum value in x
+
+\textbf{sum(x)} -	total of all the values in x
+
+\textbf{mean(x)} -	arithmetic average of the values in x
+
+\textbf{median(x)} - 	median value in x
+
+\textbf{range(x)} -	vector of min x and max x
+
+\textbf{var(x)}	-	sample variance of x
+
+\textbf{cor(x,y)} -	correlation between vectors x and y
+
+\textbf{sort(x)}	- a sorted version of x
+
+\textbf{rank(x)} -	vector of the ranks of the values in x
+
+\textbf{order(x)} -	an integer vector containing the permutation to sort x into ascending order
+
+\textbf{quantile(x)} - 	vector containing the minimum, lower quartile, median, upper quartile, and
+		maximum of x
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{cumsum(x)} -	vector containing the sum of all of the elements up to that point
+
+\textbf{cumprod(x)} -	vector containing the product of all of the elements up to that point
+
+\textbf{cummax(x)} -	vector of non-decreasing numbers which are the cumulative maxima of 
+the values in x up to that point
+
+\textbf{cummin(x)}	 - vector of non-increasing numbers which are the cumulative minima of the
+		values in x up to that point
+		
+\textbf{colMeans(x)} -	column means of dataframe or matrix x
+
+\textbf{colSums(x)} -	column totals of dataframe or matrix x
+
+\textbf{rowMeans(x)} -	row means of dataframe or matrix x
+
+\textbf{rowSums(x)} -	row totals of dataframe or matrix x
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Trabajando con vectores y Sub\'indices Logicos}
+
+
+
+\hfill
+
+x $<-$ 0:10
+
+sum(x)
+
+[1] 55
+
+\hfill
+
+sum($x<5$)
+
+[1] 5
+
+\hfill
+
+sum(x[x<5])
+
+[1] 10
+
+\hfill
+
+$x<5$
+
+[1] TRUE TRUE TRUE TRUE TRUE FALSE FALSE FALSE FALSE
+
+[10] FALSE FALSE
+
+\hfill
+
+1*($x<5$)
+
+[1] 1 1 1 1 1 0 0 0 0 0 0
+
+\hfill
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+x*($x<5$)
+
+[1] 0 1 2 3 4 0 0 0 0 0 0
+
+\hfill
+
+sum(x*(x $<$ 5))
+
+\hfill
+
+y<-c(8,3,5,7,6,6,8,9,2,3,9,4,10,4,11)
+
+\hfill
+
+sort(y)
+
+[1] 2 3 3 4 4 5 6 6 7 8 8 9 9 10 11
+
+\hfill
+
+rev(sort(y))
+
+[1] 11 10 9 9 8 8 7 6 6 5 4 4 3 3 2
+
+\hfill
+
+rev(sort(y))[2]
+
+[1] 10
+
+\hfill
+
+rev(sort(y))[1:3]
+
+[1] 11 10 9
+
+\hfill
+
+sum(rev(sort(y))[1:3])
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Direccionamiento con Vectores}
+
+\hfill
+
+y
+
+[1] 8 3 5 7 6 6 8 9 2 3 9 4 10 4 11
+
+\hfill
+
+which($y>5$)
+
+[1] 1 4 5 6 7 8 11 13 15
+
+\hfill
+
+y[$y>5$]
+
+[1] 8 7 6 6 8 9 9 10 11
+
+\hfill
+
+length(y)
+
+[1] 15
+
+\hfill
+
+length(y[$y>5$])
+
+[1] 9
+
+\hfill
+
+xv $<-$ rnorm(1000,100,10)
+
+\hfill
+
+xv[seq(25,length(xv),25)]
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+\textbf{$>>$ Encontrando los valores m\'as cercanos}
+
+\hfill
+
+which(abs(xv-108)==min(abs(xv-108)))
+
+[1] 332
+
+\hfill
+
+xv[332]
+
+[1] 108.0076
+
+\hfill
+
+closest $<-$ function(xv,sv) \{
+
+xv[which(abs(xv-sv)==min(abs(xv-sv)))] \}
+
+\hfill
+
+closest(xv,108)
+
+[1] 108.0076
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+$>>$ Aritm\'etica Logica
+
+\hfill
+
+x $<-$ 0:6
+
+\hfill
+
+x $<$ 4
+
+[1] TRUE TRUE TRUE TRUE FALSE FALSE FALSE
+
+\hfill
+
+all($ x>0$)
+
+[1] FALSE
+
+\hfill
+
+any($ x<0$)
+
+[1] FALSE
+
+\hfill
+
+sum($x<4$)
+
+[1] 4
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+
+$>>$ Repeticiones
+
+\hfill
+
+rep(9,5)
+
+[1] 9 9 9 9 9
+
+\hfill
+
+rep(1:4, 2)
+
+[1] 1 2 3 4 1 2 3 4
+
+\hfill
+
+rep(1:4, each = 2)
+
+[1] 1 1 2 2 3 3 4 4
+
+\hfill
+
+rep(1:4, each = 2, times = 3)
+
+[1] 1 1 2 2 3 3 4 4 1 1 2 2 3 3 4 4 1 1 2 2 3 3 4 4
+
+\hfill
+
+rep(1:4,1:4)
+
+[1] 1 2 2 3 3 3 4 4 4 4
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+$>>$ Generando secuencias de n\'umeros
+
+\hfill
+
+10:18
+
+[1] 10 11 12 13 14 15 16 17 18
+
+\hfill
+
+18:10
+
+[1] 18 17 16 15 14 13 12 11 10
+
+\hfill
+
+-0.5:8.5
+
+[1] -0.5 0.5 1.5 2.5 3.5 4.5 5.5 6.5 7.5 8.5
+
+\hfill
+
+seq(0,1.5,0.2)
+
+[1] 0.0 0.2 0.4 0.6 0.8 1.0 1.2 1.4
+
+\hfill
+
+seq(1.5,0,-0.2)
+
+[1] 1.5 1.3 1.1 0.9 0.7 0.5 0.3 0.1
+
+\hfill
+
+
+
+
+\end{frame}
+
+x.values $<-$ seq(min(x),max(x),(max(x)-min(x))/100)
+
+x $<-$ rnorm(18,10,2)
+
+seq(88,50,along=x)
+
+\hfill
+
+sequence(5)
+
+[1] 1 2 3 4 5
+
+\hfill
+
+sequence(5:1)
+
+[1] 1 2 3 4 5 1 2 3 4 1 2 3 1 2 1
+
+\hfill
+
+sequence(c(5,2,4))
+
+[1] 1 2 3 4 5 1 2 1 2 3 4
+
+
+\begin{frame}{C2}
+
+$>>$ Sorting, Ranking and Ordering
+
+\hfill
+
+houses $<-$ read.table("c:\\temp \\houses.txt",header=T)
+
+attach(houses)
+
+names(houses)
+
+[1] "Location" "Price"
+
+\hfill
+
+ranks $<-$ rank(Price)
+
+sorted $<-$ sort(Price)
+
+ordered $<-$ order(Price)
+
+view $<-$ data.frame(Price,ranks,sorted,ordered)
+
+view
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+y
+
+[1] 8 3 5 7 6 6 8 9 2 3 9 4 10 4 11
+
+sample(y)
+
+[1] 8 8 9 9 2 10 6 7 3 11 5 4 6 3 4
+
+sample(y)
+
+[1] 9 3 9 8 8 6 5 11 4 6 4 7 3 2 10
+
+sample(y,5)
+
+[1] 9 4 10 8 11
+
+sample(y,5)
+
+[1] 9 3 4 2 8
+
+sample(y,replace=T)
+
+[1] 9 6 11 2 9 4 6 8 8 4 4 4 3 9 3
+
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+p <- c(1, 2, 3, 4, 5, 5, 4, 3, 2, 1)
+
+x<-1:10
+
+sapply(1:5,function(i) sample(x,4,prob=p))
+
+
+\end{frame}
+
+
+\begin{frame}{C2}
+
+$>>$ Matrices
+
+X $<-$ matrix(c(1,0,0,0,1,0,0,0,1),nrow=3)
+
+X
+
+class(X)
+
+[1] "matrix"
+
+attributes(X)
+
+\$dim
+
+[1] 3 3
+
+
+vector $<-$ c(1,2,3,4,4,3,2,1)
+
+V $<-$ matrix(vector,byrow=T,nrow=2)
+
+V
+
+
+dim(vector) $<-$ c(4,2)
+
+is.matrix(vector)
+
+[1] TRUE
+
+\end{frame}
+
+
+
+\begin{frame}{C2}
+
+$>>$ Nombrando filas y columnas en matrices
+
+\hfill
+
+X $<-$ matrix(rpois(20,1.5),nrow=4)
+
+X
+
+\hfill
+
+rownames(X) $<-$ rownames(X,do.NULL=FALSE,prefix="Trial.")
+
+X
+
+\hfill
+
+drug.names<-c("aspirin", "paracetamol", "nurofen", "hedex", "placebo")
+
+colnames(X) $<-$ drug.names
+
+X
+
+\hfill
+
+dimnames(X) $<-$ list(NULL,paste("drug.",1:5,sep=""))
+
+X
+
+
+
+
+\end{frame}
+
+
+
+\begin{frame}{C2}
+
+\end{frame}
+
+
+
+\begin{frame}{C2}
+
+\end{frame}
+
+
+
+\begin{frame}{C2}
+
+\end{frame}
+
+
+
+\begin{frame}{C2}
+
+\end{frame}
+
+
+
+\begin{frame}{C2}
+
+\end{frame}
+
+
+
+\begin{frame}{C2}
+
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
